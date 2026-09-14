@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" modified="2026-09-14T14:10:00.000Z" agent="ChatGPT" version="24.7.17">
+  <diagram id="quickbite-payment-sequence" name="QuickBite - Thanh toán">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Lifelines -->
+        <mxCell id="customer" value="Khách hàng" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="40" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="app" value="Mobile App" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;rounded=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="260" y="50" width="140" height="820" as="geometry"/>
+        </mxCell>
+        <mxCell id="payment" value="PaymentService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;rounded=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="50" width="150" height="820" as="geometry"/>
+        </mxCell>
+        <mxCell id="notify" value="NotificationService" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="50" width="170" height="820" as="geometry"/>
+        </mxCell>
+        <mxCell id="restaurant" value="Nhà hàng" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1390" y="50" width="130" height="820" as="geometry"/>
+        </mxCell>
+
+        <!-- Activation bars -->
+        <mxCell id="act_app" value="" style="html=1;verticalAlign=bottom;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="app">
+          <mxGeometry x="64" y="90" width="12" height="650" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_payment" value="" style="html=1;verticalAlign=bottom;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="payment">
+          <mxGeometry x="69" y="240" width="12" height="330" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_notify" value="" style="html=1;verticalAlign=bottom;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="notify">
+          <mxGeometry x="79" y="520" width="12" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Messages -->
+        <mxCell id="m1" value="1. Bấm &quot;Thanh toán&quot;" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="customer" target="app">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="185" y="180"/><mxPoint x="325" y="180"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- loop frame -->
+        <mxCell id="loop" value="loop [mỗi món trong giỏ hàng]" style="shape=umlFrame;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=5;fillColor=none;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="210" y="205" width="300" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="m2" value="2. total += giá món" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" edge="1" parent="1" source="app" target="app">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="410" y="255"/><mxPoint x="410" y="290"/><mxPoint x="335" y="290"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- opt frame -->
+        <mxCell id="opt" value="opt [có nhập Voucher]" style="shape=umlFrame;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=5;fillColor=none;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="210" y="345" width="710" height="150" as="geometry"/>
+        </mxCell>
+        <mxCell id="m3" value="3. áp dụng Voucher" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="app" target="payment">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="470" y="395"/><mxPoint x="650" y="395"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m4" value="4. kết quả Voucher" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" edge="1" parent="1" source="payment" target="app">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="650" y="445"/><mxPoint x="470" y="445"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Payment -->
+        <mxCell id="m5" value="5. yêu cầu thanh toán" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="app" target="payment">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="470" y="530"/><mxPoint x="650" y="530"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- alt frame -->
+        <mxCell id="alt" value="alt [đủ tiền] / else [không đủ tiền]" style="shape=umlFrame;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingTop=5;fillColor=none;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="210" y="570" width="1040" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="divider" value="" style="shape=rectangle;fillColor=none;strokeColor=#666666;dashed=1;html=1;" vertex="1" parent="1">
+          <mxGeometry x="210" y="695" width="1040" height="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Success -->
+        <mxCell id="m6" value="6a. Thanh toán thành công" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" edge="1" parent="1" source="payment" target="app">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="650" y="625"/><mxPoint x="470" y="625"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m7" value="7. thông báo đơn mới (Async)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="payment" target="notify">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="800" y="660"/><mxPoint x="1060" y="660"/></Array></mxGeometry>
+        </mxCell>
+        <mxCell id="m8" value="8. báo Nhà hàng có đơn mới" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="notify" target="restaurant">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="1230" y="675"/><mxPoint x="1390" y="675"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Failure -->
+        <mxCell id="m9" value="6b. Thanh toán thất bại" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" edge="1" parent="1" source="payment" target="app">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="650" y="755"/><mxPoint x="470" y="755"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="Chú thích:  ───▶ Sync (phải chờ)   - - -▶ Return (phản hồi)   ───▶ Async (không chờ)   ⟳ Self (xử lý nội bộ)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="210" y="890" width="1040" height="55" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

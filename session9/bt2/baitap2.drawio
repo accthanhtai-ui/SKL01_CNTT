@@ -1,0 +1,59 @@
+<mxfile host="app.diagrams.net" modified="2026-09-14T14:20:00.000Z" agent="ChatGPT" version="24.7.17">
+  <diagram id="rikkei-logistics-export" name="Rikkei Logistics - Xuất kho">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/><mxCell id="1" parent="0"/>
+
+        <!-- Lifelines -->
+        <mxCell id="staff" value="Nhân viên kho" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="40" width="70" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="ui" value="WarehouseUI" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="260" y="50" width="150" height="700" as="geometry"/>
+        </mxCell>
+        <mxCell id="inv" value="InventoryManager" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="650" y="50" width="180" height="700" as="geometry"/>
+        </mxCell>
+
+        <!-- Activation bars -->
+        <mxCell id="actui" value="" style="html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="ui">
+          <mxGeometry x="69" y="130" width="12" height="330" as="geometry"/>
+        </mxCell>
+        <mxCell id="actinv" value="" style="html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="inv">
+          <mxGeometry x="84" y="210" width="12" height="220" as="geometry"/>
+        </mxCell>
+
+        <!-- Message 1 -->
+        <mxCell id="m1" value="1. Quét mã kiện hàng" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="staff" target="ui">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="175" y="180"/><mxPoint x="335" y="180"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Message 2 Sync -->
+        <mxCell id="m2" value="2. export_package() — Sync" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="ui" target="inv">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="420" y="250"/><mxPoint x="650" y="250"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Message 3 Self -->
+        <mxCell id="m3" value="3. kiểm tra hạn lưu kho() — Self" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;" edge="1" parent="1" source="inv" target="inv">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="830" y="315"/><mxPoint x="900" y="315"/><mxPoint x="900" y="375"/><mxPoint x="830" y="375"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Message 4 Return -->
+        <mxCell id="m4" value="4. Kết quả xuất kho — Return" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;endArrow=open;endFill=0;" edge="1" parent="1" source="inv" target="ui">
+          <mxGeometry relative="1" as="geometry"><Array as="points"><mxPoint x="650" y="440"/><mxPoint x="420" y="440"/></Array></mxGeometry>
+        </mxCell>
+
+        <!-- Notes -->
+        <mxCell id="note1" value="Lỗi 1 đã sửa: export_package() phải là Sync vì WarehouseUI chờ kết quả." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="980" y="220" width="300" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="note2" value="Lỗi 2 đã sửa: kiểm tra hạn lưu kho là Self vì InventoryManager tự xử lý nội bộ." style="shape=note;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="980" y="330" width="300" height="90" as="geometry"/>
+        </mxCell>
+        <mxCell id="legend" value="Chú thích: Sync = gọi và chờ kết quả | Self = đối tượng tự gọi chính nó | Return = phản hồi kết quả" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="220" y="790" width="850" height="55" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
